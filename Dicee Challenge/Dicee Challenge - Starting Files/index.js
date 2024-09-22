@@ -1,7 +1,5 @@
 var randomNumber1 = Math.floor(Math.random()*6)+1;
-document.querySelector("img.img1").setAttribute("src", "./images/dice" + randomNumber1 + ".png");
 var randomNumber2 = Math.floor(Math.random()*6)+1;
-document.querySelector("img.img2").setAttribute("src", "./images/dice" + randomNumber2 + ".png");
 
 function changeH1Text(){ 
 
@@ -13,4 +11,19 @@ function changeH1Text(){
        document.querySelector(".container > h1").innerHTML = "Draw";
 }
 
-changeH1Text();
+function changeDice(){
+
+    document.querySelector("img.img1").setAttribute("src", "./images/dice" + randomNumber1 + ".png");
+    document.querySelector("img.img2").setAttribute("src", "./images/dice" + randomNumber2 + ".png");
+}
+play();
+function play(){
+
+    changeH1Text();
+    changeDice();
+
+}
+
+
+
+document.querySelector(".flex-container > .button").onclick();
