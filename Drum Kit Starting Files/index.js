@@ -9,7 +9,7 @@ var crash = new Audio('./sounds/crash.mp3');
 var snare = new Audio('./sounds/snare.mp3');
 
 //Detecting click press
-
+//aici aplicam event listeners asupra fiercarul element ce se incadreaza in "button.drum"
 
 for(var i = 0; i < document.querySelectorAll("button.drum").length; i++){
 
@@ -29,7 +29,7 @@ for(var i = 0; i < document.querySelectorAll("button.drum").length; i++){
 
 
 //Detecting keyboard Press
-
+//aoco adaugam un event listener asupra intregului document
 document.addEventListener("keydown", function (event){
 
     playTheCorrectSound(event.key);
