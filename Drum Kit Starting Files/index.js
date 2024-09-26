@@ -22,7 +22,7 @@ for(var i = 0; i < document.querySelectorAll("button.drum").length; i++){
         var buttonInnerHTML = this.innerHTML;
 
         playTheCorrectSound(buttonInnerHTML);
-
+        buttonAnimation(buttonInnerHTML);
     });
 
 }
@@ -33,7 +33,7 @@ for(var i = 0; i < document.querySelectorAll("button.drum").length; i++){
 document.addEventListener("keydown", function (event){
 
     playTheCorrectSound(event.key);
-
+    buttonAnimation(event.key);
 });
 
 
@@ -63,5 +63,19 @@ function playTheCorrectSound(character){
         } break;
         default: console.log(buttonInnerHTML);
     }
+
+}
+
+function buttonAnimation(currentKey){
+
+    var activeButton = document.querySelector("." + currentKey);
+
+    activeButton.classList.add("pressed");
+
+    setTimeout(function () {
+        activeButton.classList.remove("pressed");
+    }, 100);
+
+    
 
 }
