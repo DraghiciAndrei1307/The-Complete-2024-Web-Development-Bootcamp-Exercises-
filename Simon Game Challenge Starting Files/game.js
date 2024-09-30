@@ -1,12 +1,21 @@
 
+//VARIABLES AND INITIAL STATES
+
 var buttonColours = ["red", "blue", "green", "yellow"];
 
 var gamePattern = [];
 
 var userClickedPattern = [];
 
+var started = false;
 
-function nextSequence(){
+var level = 0;
+
+$("h1").text("Press A Key to Start");
+
+//FUNCTIONS
+
+function nextSequence(){   //function that generates the next color of the gamePattern
 
     var randomNumber = Math.round(Math.random() * 3);
 
@@ -25,32 +34,14 @@ function nextSequence(){
 
 }
 
-$(".btn").click(function(event){
-    var userChosenColour = event.target.id;
-
-    userClickedPattern.push(userChosenColour);
-
-    playSound(userChosenColour);
-
-    animatePress(userChosenColour);
-
-    console.log(userClickedPattern);
-    console.log(gamePattern);
-
-    checkAnswer(userClickedPattern.length - 1);
-
-
-
-});
-
-function playSound(name){
+function playSound(name){  //function that plays a certain sound
 
     var audio = new Audio("./sounds/" + name + ".mp3");
     audio.play();
 
 }
 
-function animatePress(currentColour){
+function animatePress(currentColour){ //function that animates the buttons when are clicked
 
     $("#" + currentColour).addClass("pressed");
 
@@ -60,29 +51,9 @@ function animatePress(currentColour){
 
 }
 
+function checkAnswer(currentLevel){ //function that checks the answer 
 
-
-
-var started = false;
-
-var level = 0;
-
-$("h1").text("Press A Key to Start");
-
-$(document).on("keydown", function(){
-
-    if(started === false){
-        started = true;
-        $("h1").text("Level " + level);
-        nextSequence();
-    }
-        
-});
-
-
-function checkAnswer(currentLevel){
-
-    if(gamePattern[currentLevel] === userClickedPattern[currentLevel]){
+    if(gamePattern[currentLevel] === userClickedPattern[currentLevel]){  
         console.log("success");
 
         if(userClickedPattern.length === gamePattern.length){
@@ -110,10 +81,7 @@ function checkAnswer(currentLevel){
         $("h1").text("Game Over, Press Any Key to Restart");
 
         startOver();
-
     }
-
-
 
 }
 
@@ -125,3 +93,35 @@ function startOver(){
     started = false;
 }
 
+
+
+//ADD EVENT LISTENERS TO WAIT FOR A KEYDOWN ON THE KEYBOARD
+
+$(document).on("keydown", function(){
+
+    if(started === false){
+        started = true;
+        $("h1").text("Level " + level);
+        nextSequence();
+    }
+        
+});
+
+
+//ADD EVENT LISTENERS TO THE BUTTONS IN ORDER TO DETECT CLICKS
+
+$(".btn").click(function(event){
+    var userChosenColour = event.target.id;
+
+    userClickedPattern.push(userChosenColour);
+
+    playSound(userChosenColour);
+
+    animatePress(userChosenColour);
+
+    console.log(userClickedPattern);
+    console.log(gamePattern);
+
+    checkAnswer(userClickedPattern.length - 1);
+
+});
